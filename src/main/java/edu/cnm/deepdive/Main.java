@@ -22,13 +22,16 @@ public class Main {
       } else {
         String input = scanner.next();
         char modeFlag = Character.toUpperCase(input.strip().charAt(0));
+        mode = switch (modeFlag) {
+          case 'C'-> Mode.CELSIUS_TO_FAHRENHEIT;
+          case 'F' -> Mode.FAHRENHEIT_TO_CELSIUS;
+            default -> {
+              System.err.println("Invalid input:" + input);
+              // TODO: Print error message to standard error
+              yield mode;
 
-        switch (modeFlag) {
-          case 'C'-> mode = Mode.CELSIUS_TO_FAHRENHEIT;
-          case 'F' -> mode = Mode.FAHRENHEIT_TO_CELSIUS;
-            default -> System.err.println("Invalid input:" + input);
-            // TODO: Print error message to standard error
-        }
+            }
+        };
 
       }
     }
