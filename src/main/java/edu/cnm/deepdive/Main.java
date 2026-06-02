@@ -10,27 +10,11 @@ public class Main {
     Converter converter = new Converter();
     // DONE: 6/2/26 Start reading from standard input.
     Scanner scanner = new Scanner(System.in);
-    // TODO: 6/2/26 While there is any input remaining to process;
     while (scanner.hasNext()) {
       if (scanner.hasNextDouble()) {
-        double input = scanner.nextDouble();
-        double output = mode == Mode.CELSIUS_TO_FAHRENHEIT
-            ? converter.convertC2F(input)
-            : converter.convertF2C(input);
-        // TODO: 6/2/26 Print conversion mode, inout, output.
-        System.out.println("input = " + input + "; output = " + output);
+        handleConversion(scanner, mode, converter);
       } else {
-        String input = scanner.next();
-        char modeFlag = Character.toUpperCase(input.strip().charAt(0));
-        mode = switch (modeFlag) {
-          case 'C'-> Mode.CELSIUS_TO_FAHRENHEIT;
-          case 'F' -> Mode.FAHRENHEIT_TO_CELSIUS;
-            default -> {
-              System.err.println("Invalid input:" + input);
-              // TODO: Print error message to standard error
-              yield mode;
-            }
-        };
+        mode = handleModeChange(scanner, mode);
 
       }
     }
@@ -39,6 +23,30 @@ public class Main {
     //                 b. if token is 'F', switch mode to Fahrenheit-to-Celsius for subsequent conversions.
     //                 c. if token is 'C', switch mode to Celsius-to-Fahrenheit for subsequent conversions.
     //                 d. if token is anything else, write error message to standard error.
+  }
+
+  private static Mode handleModeChange(Scanner scanner, Mode mode) {
+    String input = scanner.next();
+    char modeFlag = Character.toUpperCase(input.strip().charAt(0));
+    mode = switch (modeFlag) {
+      case 'C'-> Mode.CELSIUS_TO_FAHRENHEIT;
+      case 'F' -> Mode.FAHRENHEIT_TO_CELSIUS;
+        default -> {
+          System.err.println("Invalid input:" + input);
+          // TODO: Print error message to standard error
+          yield mode;
+        }
+    };
+    return mode;
+  }
+
+  private static void handleConversion(Scanner scanner, Mode mode, Converter converter) {
+    double input = scanner.nextDouble();
+    double output = mode == Mode.CELSIUS_TO_FAHRENHEIT
+        ? converter.convertC2F(input)
+        : converter.convertF2C(input);
+    // TODO: 6/2/26 Print conversion mode, inout, output.
+    System.out.println("input = " + input + "; output = " + output);
   }
 
   private enum Mode {
