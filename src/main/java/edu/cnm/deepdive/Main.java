@@ -18,19 +18,15 @@ public class Main {
             ? converter.convertC2F(input)
             : converter.convertF2C(input);
         // TODO: 6/2/26 Print conversion mode, inout, output.
-        System.out.println("input = " + input + "; output =" + output);
+        System.out.println("input = " + input + "; output = " + output);
       } else {
         String input = scanner.next();
         char modeFlag = Character.toUpperCase(input.strip().charAt(0));
 
         switch (modeFlag) {
-          case 'C':
-            mode = Mode.CELSIUS_TO_FAHRENHEIT;
-            break;
-          case 'F':
-            mode = Mode.FAHRENHEIT_TO_CELSIUS;
-            break;
-            default:
+          case 'C'-> mode = Mode.CELSIUS_TO_FAHRENHEIT;
+          case 'F' -> mode = Mode.FAHRENHEIT_TO_CELSIUS;
+            default -> System.err.println("Invalid input:" + input);
             // TODO: Print error message to standard error
         }
 
