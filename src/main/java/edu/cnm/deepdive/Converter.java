@@ -12,4 +12,5 @@ public class Converter {
   public double convertF2C(double fahrenheit){
     return (fahrenheit - FAHRENHEIT_OFFSET_FROM_CELSIUS) / CELSIUS_TO_FAHRENHEIT_SCALE;
   }
+
 }
