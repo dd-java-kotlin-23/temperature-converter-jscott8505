@@ -44,8 +44,16 @@ public class Main {
     final var output = mode == Mode.CELSIUS_TO_FAHRENHEIT
         ? converter.convertC2F(input)
         : converter.convertF2C(input);
-    // TODO: 6/2/26 Print conversion mode, inout, output.
-    System.out.println("input = " + input + "; output = " + output);
+    System.out.println(buildConversionOutput(mode, input, output));
+  }
+
+
+  private static String buildConversionOutput(Mode mode, double input, double output) {
+    String format = (mode == Mode.CELSIUS_TO_FAHRENHEIT)
+        ? "Celsius = %.2f; Fahrenheit = %.2f"
+        : "Fahrenheit = %.2f; Celsius = %.2f";
+    return format. formatted(input, output);
   }
 
 }
+
