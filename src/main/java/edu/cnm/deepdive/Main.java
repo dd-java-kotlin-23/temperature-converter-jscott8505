@@ -29,7 +29,6 @@ public class Main {
               System.err.println("Invalid input:" + input);
               // TODO: Print error message to standard error
               yield mode;
-
             }
         };
 
